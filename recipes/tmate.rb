@@ -23,6 +23,13 @@ directory node['tmate']['log_dir'] do
   action :create
 end
 
+directory "#{node['tmate']['home_dir']}/bin" do
+  owner node['tmate']['username']
+  group node['tmate']['username']
+  mode 0755
+  action :create
+end
+
 git "#{node['tmate']['src_dir']}" do
   repository node['tmate']['repoURL']
   action :sync
@@ -35,6 +42,15 @@ execute 'create_keys' do
 end
 
 execute 'compile_all_the_things' do
-  cwd "#{node['tmate']['home_dir']}/src"
+  cwd "#{node['tmate']['src_dir']}"
   command './autogen.sh && ./configure && make'
+  creates "#{node['tmate']['src_dir']}/tmate-slave"
+end
+
+file "/usr/local/bin/tmate-slave" do
+  owner 'root'
+  group 'root'
+  mode 0755
+  content ::File.open("#{node['tmate']['src_dir']}/tmate-slave").read
+  action :create
 end
