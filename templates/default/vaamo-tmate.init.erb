@@ -15,17 +15,20 @@ pre-start script
     test -x <%= node['tmate']['binary_dir'] %>/tmate-slave || { stop; exit 0; }
 end script
 
-exec <%= node['tmate']['binary_dir'] %>/tmate-slave \
-  <% if node['tmate']['keys_dir'] -%>
-    -k <%= node['tmate']['keys_dir'] %> \
-  <% end -%>
-  <% if node['tmate']['log_file'] -%>
-    -l <%= node['tmate']['log_file'] %> \
-  <% end -%>
-  <% if node['tmate']['port'] -%>
-    -p <%= node['tmate']['port'] %> \
-  <% end -%>
-  <% if node['tmate']['host'] -%>
-    -h <%= node['tmate']['host'] %>
-  <% end -%>
-
+exec \
+<% if node['tmate']['port'] >= 1024 %>
+  sudo -u <%= node['tmate']['username'] %> \
+<% end %>
+  <%= node['tmate']['binary_dir'] %>/tmate-slave \
+<% if node['tmate']['key_dir'] -%>
+  -k <%= node['tmate']['key_dir'] %> \
+<% end -%>
+<% if node['tmate']['log_file'] -%>
+  -l <%= node['tmate']['log_file'] %> \
+<% end -%>
+<% if node['tmate']['port'] -%>
+  -p <%= node['tmate']['port'] %> \
+<% end -%>
+<% if node['tmate']['host'] -%>
+  -h <%= node['tmate']['host'] %>
+<% end -%>
