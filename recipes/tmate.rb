@@ -47,12 +47,12 @@ execute 'compile_all_the_things' do
   creates "#{node['tmate']['src_dir']}/tmate-slave"
 end
 
-link "#{node['tmate']['binary_path']}/tmate-slave" do
+link "#{node['tmate']['binary_dir']}/tmate-slave" do
   to "#{node['tmate']['src_dir']}/tmate-slave"
 end
 
-directory "#{node['tmate']['cfg_path']}"
+directory "#{node['tmate']['cfg_dir']}"
 
-link "#{node['tmate']['cfg_path']}/keys" do
+link "#{node['tmate']['cfg_dir']}/keys" do
   to "#{node['tmate']['home_dir']}/keys"
 end
