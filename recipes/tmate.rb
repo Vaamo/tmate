@@ -47,10 +47,12 @@ execute 'compile_all_the_things' do
   creates "#{node['tmate']['src_dir']}/tmate-slave"
 end
 
-file "/usr/local/bin/tmate-slave" do
-  owner 'root'
-  group 'root'
-  mode 0755
-  content ::File.open("#{node['tmate']['src_dir']}/tmate-slave").read
-  action :create
+link '/usr/local/bin/tmate-slave' do
+  to "#{node['tmate']['src_dir']}/tmate-slave"
+end
+
+directory '/usr/local/etc/tmate'
+
+link "/usr/local/etc/tmate/keys" do
+  to "#{node['tmate']['home_dir']}/keys"
 end
