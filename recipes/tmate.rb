@@ -56,3 +56,10 @@ directory "#{node['tmate']['cfg_dir']}"
 link "#{node['tmate']['cfg_dir']}/keys" do
   to "#{node['tmate']['home_dir']}/keys"
 end
+
+template '/etc/init/tmate-slave.conf' do
+  source 'vaamo-tmate.init.erb'
+  owner 'root'
+  group 'root'
+  mode 0755
+end
