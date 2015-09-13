@@ -9,7 +9,9 @@
 
 default['tmate']['repoURL']      = 'https://github.com/nviennot/tmate-slave.git'
 default['tmate']['username']     = 'tmate'
-default['tmate']['home_prefix']  = "/opt"
+default['tmate']['home_prefix']  = '/opt'
+default['tmate']['binary_path']  = '/usr/local/bin'
+default['tmate']['cfg_path']     = "/usr/local/etc/tmate"
 default['tmate']['home_dir']     = "#{node['tmate']['home_prefix']}/#{node['tmate']['username']}"
 default['tmate']['src_dir']      = "#{default['tmate']['home_dir']}/src"
 default['tmate']['log_dir']      = '/var/log/tmate'
