@@ -1,6 +1,6 @@
 # vaamo_tmate-cookbook
 
-TODO: Enter the cookbook description here.
+Installes a tmate-slave server on a node.
 
 ## Supported Platforms
 
