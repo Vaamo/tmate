@@ -65,5 +65,5 @@ template '/etc/init/tmate-slave.conf' do
 end
 
 service 'tmate-slave' do
-    action :start
+  action :start
 end
