@@ -13,20 +13,14 @@ default['tmate']['home_prefix']  = '/opt'
 default['tmate']['binary_dir']   = '/usr/local/bin'
 default['tmate']['cfg_dir']      = '/usr/local/etc/tmate'
 default['tmate']['key_dir']      = "#{node['tmate']['cfg_dir']}/keys"
-default['tmate']['home_dir']     = "#{node['tmate']['home_prefix']}/#{node['tmate']['username']}"
+default['tmate']['home_dir']     = "#{node['tmate']['home_prefix']}/\
+#{node['tmate']['username']}"
 default['tmate']['src_dir']      = "#{default['tmate']['home_dir']}/src"
 default['tmate']['log_dir']      = '/var/log/tmate'
 default['tmate']['log_file']     = "#{node['tmate']['log_dir']}/tmate.log"
 default['tmate']['host']         = node['fqdn']
 default['tmate']['port']         = 2222
-default['tmate']['dependencies'] = %w{git-core
-    build-essential
-    pkg-config
-    libtool
-    libevent-dev
-    libncurses-dev
-    zlib1g-dev
-    automake
-    libssh-dev
-    cmake
-    ruby}
+default['tmate']['dependencies'] = %w(
+  git-core build-essential pkg-config libtool libevent-dev libncurses-dev
+  zlib1g-dev automake libssh-dev cmake ruby
+)

@@ -30,7 +30,7 @@ directory "#{node['tmate']['home_dir']}/bin" do
   action :create
 end
 
-git "#{node['tmate']['src_dir']}" do
+git node['tmate']['src_dir'] do
   repository node['tmate']['repoURL']
   action :sync
 end
@@ -42,7 +42,7 @@ execute 'create_keys' do
 end
 
 execute 'compile_all_the_things' do
-  cwd "#{node['tmate']['src_dir']}"
+  cwd node['tmate']['src_dir']
   command './autogen.sh && ./configure && make'
   creates "#{node['tmate']['src_dir']}/tmate-slave"
 end
@@ -51,7 +51,7 @@ link "#{node['tmate']['binary_dir']}/tmate-slave" do
   to "#{node['tmate']['src_dir']}/tmate-slave"
 end
 
-directory "#{node['tmate']['cfg_dir']}"
+directory node['tmate']['cfg_dir']
 
 link "#{node['tmate']['cfg_dir']}/keys" do
   to "#{node['tmate']['home_dir']}/keys"
@@ -62,4 +62,8 @@ template '/etc/init/tmate-slave.conf' do
   owner 'root'
   group 'root'
   mode 0755
+end
+
+service 'tmate-slave' do
+    action :start
 end
