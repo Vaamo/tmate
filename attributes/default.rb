@@ -7,14 +7,15 @@
 # All rights reserved - Do Not Redistribute
 #
 
-default['tmate']['repo_url']      = 'https://github.com/nviennot/tmate-slave.git'
+default['tmate']['repo_url']     = 'https://github.com/nviennot/tmate-slave.git'
+default['tmate']['binary_name']  = 'tmate-slave'
 default['tmate']['username']     = 'tmate'
-default['tmate']['home_prefix']  = '/opt'
+default['tmate']['home_prefix']  = '/home'
 default['tmate']['binary_dir']   = '/usr/local/bin'
 default['tmate']['cfg_dir']      = '/usr/local/etc/tmate'
-default['tmate']['key_dir']      = "#{node['tmate']['cfg_dir']}/keys"
 default['tmate']['home_dir']     = "#{node['tmate']['home_prefix']}/#{node['tmate']['username']}"
-default['tmate']['src_dir']      = "#{default['tmate']['home_dir']}/src"
+default['tmate']['key_dir']      = "#{node['tmate']['home_dir']}/keys"
+default['tmate']['src_dir']      = "#{node['tmate']['home_dir']}/src"
 default['tmate']['log_dir']      = '/var/log/tmate'
 default['tmate']['log_file']     = "#{node['tmate']['log_dir']}/tmate.log"
 default['tmate']['host']         = node['fqdn']

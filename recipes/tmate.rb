@@ -44,26 +44,30 @@ end
 execute 'compile_all_the_things' do
   cwd node['tmate']['src_dir']
   command './autogen.sh && ./configure && make'
-  creates "#{node['tmate']['src_dir']}/tmate-slave"
-end
-
-link "#{node['tmate']['binary_dir']}/tmate-slave" do
-  to "#{node['tmate']['src_dir']}/tmate-slave"
+  creates "#{node['tmate']['src_dir']}/#{node['tmate']['binary_name']}"
 end
 
 directory node['tmate']['cfg_dir']
 
-link "#{node['tmate']['cfg_dir']}/keys" do
-  to "#{node['tmate']['home_dir']}/keys"
+execute 'move_keys' do
+  cwd node['tmate']['home_dir']
+  command "mv keys #{node['tmate']['cfg_dir']}"
+  creates "#{node['tmate']['cfg_dir']}/keys"
 end
 
-template '/etc/init/tmate-slave.conf' do
+execute 'move_binary' do
+  cwd node['tmate']['home_dir']
+  command "mv #{node['tmate']['src_dir']}/#{node['tmate']['binary_name']} #{node['tmate']['binary_dir']}"
+  creates "#{node['tmate']['binary_dir']}/${node['tmate']['binary_name']}"
+end
+
+template "/etc/init/#{node['tmate']['binary_name']}.conf" do
   source 'vaamo-tmate.init.erb'
   owner 'root'
   group 'root'
   mode 0755
 end
 
-service 'tmate-slave' do
+service "#{node['tmate']['binary_name']}" do
   action [:start, :enable]
 end
