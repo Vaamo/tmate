@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-default['tmate']['repoURL']      = 'https://github.com/nviennot/tmate-slave.git'
+default['tmate']['repo_url']      = 'https://github.com/nviennot/tmate-slave.git'
 default['tmate']['username']     = 'tmate'
 default['tmate']['home_prefix']  = '/opt'
 default['tmate']['binary_dir']   = '/usr/local/bin'

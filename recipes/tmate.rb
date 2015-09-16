@@ -31,7 +31,7 @@ directory "#{node['tmate']['home_dir']}/bin" do
 end
 
 git node['tmate']['src_dir'] do
-  repository node['tmate']['repoURL']
+  repository node['tmate']['repo_url']
   action :sync
 end
 
