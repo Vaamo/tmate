@@ -52,7 +52,7 @@ directory node['tmate']['cfg_dir']
 execute 'move_keys' do
   cwd node['tmate']['home_dir']
   command "mv keys #{node['tmate']['cfg_dir']}"
-  creates "#{node['tmate']['cfg_dir']}/keys"
+  creates "#{node['tmate']['key_dir']}"
 end
 
 execute 'move_binary' do
