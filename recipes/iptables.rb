@@ -9,5 +9,5 @@
 
 # Add tmate-slave port to iptables
 iptables_ng_rule 'tmate-slave' do
-      rule "--protocol tcp --dport #{node['tmate']['port']} --match state --state NEW --jump ACCEPT"
+  rule "--protocol tcp --dport #{node['tmate']['port']} --match state --state NEW --jump ACCEPT"
 end
