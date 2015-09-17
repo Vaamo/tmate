@@ -8,3 +8,4 @@
 #
 
 include_recipe 'vaamo_tmate::tmate'
+include_recipe 'vaamo_tmate::iptables'
