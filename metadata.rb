@@ -1,4 +1,4 @@
-name             'vaamo_tmate'
+name             'tmate'
 maintainer       'Malte Krupa'
 maintainer_email 'malte.krupa@vaamo.de'
 license          'All rights reserved'
