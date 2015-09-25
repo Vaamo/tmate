@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: tmate
-# Recipe:: tmate
+# Recipe:: install
 #
 # Copyright (C) 2015 Vaamo Finanz AG
 #
@@ -56,6 +56,8 @@ end
 
 # Generate private and public keys
 execute 'create_keys' do
+  user username
+  group username
   cwd home_dir
   command "#{src_dir}/create_keys.sh"
   creates "#{home_dir}/keys"
@@ -63,6 +65,8 @@ end
 
 # Compile tmate-slave
 execute 'compile_all_the_things' do
+  user username
+  group username
   cwd src_dir
   command './autogen.sh && ./configure && make'
   creates "#{src_dir}/#{binary_name}"
@@ -83,17 +87,4 @@ execute 'move_binary' do
   cwd home_dir
   command "mv #{src_dir}/#{binary_name} #{binary_dir}"
   creates "#{binary_dir}/#{binary_name}"
-end
-
-# Create upstart script
-template "/etc/init/#{binary_name}.conf" do
-  source 'vaamo-tmate.init.erb'
-  owner 'root'
-  group 'root'
-  mode 0755
-end
-
-# Create, start and enable a service for tmate-slave
-service binary_name do
-  action [:start, :enable]
 end

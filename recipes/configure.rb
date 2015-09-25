@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: tmate
-# Recipe:: tmate
+# Recipe:: configure
 #
 # Copyright (C) 2015 Vaamo Finanz AG
 #
@@ -17,7 +17,18 @@
 # limitations under the License.
 #
 
-# Add tmate-slave port to iptables
-iptables_ng_rule '50-tmate-slave' do
-  rule "--protocol tcp --dport #{node['tmate']['port']} --match state --state NEW --jump ACCEPT"
+# Declare variables
+binary_name = node['tmate']['binary_name']
+
+# Create upstart script
+template "/etc/init/#{binary_name}.conf" do
+  source 'vaamo-tmate.init.erb'
+  owner 'root'
+  group 'root'
+  mode 0755
+end
+
+# Create, start and enable a service for tmate-slave
+service binary_name do
+  action [:start, :enable]
 end

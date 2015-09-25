@@ -17,5 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe 'vaamo_tmate::tmate'
-include_recipe 'vaamo_tmate::iptables'
+include_recipe 'tmate::install'
+include_recipe 'tmate::configure'
