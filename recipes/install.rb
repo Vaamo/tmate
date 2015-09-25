@@ -50,6 +50,8 @@ end
 
 # Clone tmate-slave repository
 git src_dir do
+  user username
+  group username
   repository repo_url
   action :sync
 end
