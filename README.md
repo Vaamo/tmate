@@ -5,7 +5,6 @@ Installes a tmate-slave server on a node.
 ## Supported Platforms
 
  * Ubuntu
- * Debian
 
 ## Attributes
 
